@@ -18,22 +18,19 @@ export class Account {
 
                 $el.find('.button-2.delete-address-button').click();
         
-                //confirm promt to delete an item
-                cy.on('window:confirm', () => true);
-                
-                //add page reload
-                cy.window().document().then(function (doc) {
-                    doc.addEventListener('click', () => {
-                      // this adds a listener that reloads your page 
-                        setTimeout(function () { doc.location.reload() }, 2000)
-                    })
-                })  
-                  
+                //confirm promt to delete an item and reload the page
+                cy.on('window:confirm', () => {
+                    setTimeout(() => {
+                        window.location.reload()
+                    }, 2000);
+                    
+                });    
+
             }
 
         })
 
-    };
+    }
 
 
 }

@@ -19,7 +19,7 @@ const checkoutPage =new Checkout
 const accountPage = new Account
 const wishListPage = new WishList
 
-/*describe('e-shop user registration and login', () => {
+describe('e-shop user registration and login', () => {
 
     beforeEach(() => {
         
@@ -58,23 +58,22 @@ const wishListPage = new WishList
     });
 
 });  
-*/
+
 describe('e-shop product tests ', () => {
 
-    after(() => {
-        cy.logUser('shop_test@example.com','asdf0102');
-        accountPage.clearUserAddress();           //clear user address 
-        wishListPage.clearWishList();             //clear WishList
-    })   
-
-    beforeEach(() => {
-        
+    beforeEach(() => {      
         cy.logUser('shop_test@example.com','asdf0102');
         cy.viewport('macbook-13');                           //  set dimension 1280 x 800
         cy.on('uncaught:exception', (err, runnable) => {     //turn off uncaught exceptions to prevent test failing
             return false           
         });
     })
+
+    after(() => {
+        cy.logUser('shop_test@example.com','asdf0102');
+        accountPage.clearUserAddress();           //clear user address 
+        wishListPage.clearWishList();             //clear WishList
+    })   
 
     it('should verify items in Computer group', () => {
         

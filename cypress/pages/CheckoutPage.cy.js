@@ -1,5 +1,6 @@
 export class Checkout {
-    
+    pnlBillingAddress = '#checkout-step-billing';
+    selectBillingAddress = 'select#billing-address-select';
     listCountries = 'select#BillingNewAddress_CountryId';
     listStates = 'select#BillingNewAddress_StateProvinceId';
     txtCity ='#BillingNewAddress_City';
@@ -16,15 +17,26 @@ export class Checkout {
     lblTextOrderProcessed = '.order-completed strong';
 
     populateBillingAddress(country, state, city, adress, zip, phone){
+        
+        //check if Address is already populated
+        cy.get(this.pnlBillingAddress).then(($el) => {
 
-        cy.get(this.listCountries).select(country);
-        cy.get(this.listStates).select(state);
-        cy.get(this.txtCity).type(city);
-        cy.get(this.txtAdress).type(adress);
-        cy.get(this.txtZip).type(zip);
-        cy.get(this.txtPhone).type(phone);
-
-        cy.get(this.btnContinueBillingAddress).click();
+            if ($el.find(this.selectBillingAddress).length) {
+                //press Continue in case address exists
+                cy.get(this.btnContinueBillingAddress).click();
+            }
+            else {
+                //populatedaddress 
+                cy.get(this.listCountries).select(country);
+                cy.get(this.listStates).select(state);
+                cy.get(this.txtCity).type(city);
+                cy.get(this.txtAdress).type(adress);
+                cy.get(this.txtZip).type(zip);
+                cy.get(this.txtPhone).type(phone);
+                
+                cy.get(this.btnContinueBillingAddress).click();
+            }
+        })
 
     }
 
